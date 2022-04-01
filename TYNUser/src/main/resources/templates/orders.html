@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zxx" class="no-js" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: head">
+  <title>TYN Store</title>
+</head>
+
+<body>
+
+<!-- Start Header Area -->
+<header th:replace="fragments :: header" class="header_area sticky-header">
+</header>
+<!-- End Header Area -->
+
+<!-- Start Banner Area -->
+<section th:replace="fragments :: banner('TYN Store Xin Chào!')" class="banner-area organic-breadcrumb">
+</section>
+<!-- End Banner Area -->
+
+<!--================Cart Area =================-->
+<form th:action="@{/carts/update}" method="post">
+  <section class="cart_area">
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Ngày Đặt</th>
+              <th scope="col">Tổng Tiền</th>
+              <th scope="col">Trạng thái</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${orders}">
+              <td>
+                <div class="media">
+                    <span th:text="${item.id}"></span>
+                </div>
+              </td>
+              <td>
+                <span th:text="${item.orderDate}"></span>
+              </td>
+              <td>
+                <h5 th:text="${item.total + 'đ'}"></h5>
+              </td>
+              <td>
+                <span th:text="${item.status}"></span>
+              </td>
+              <td>
+                <a th:href="@{'/user/order-details?id=' + ${item.id}}" class="btn btn-primary btn-sm text-white"><i class="fa fa-eye"></i></a>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>
+<!--================End Cart Area =================-->
+
+<!-- start footer Area -->
+<footer th:replace="fragments :: footer" class="footer-area section_gap">
+</footer>
+<!-- End footer Area -->
+
+<div th:replace="fragments :: scripts">
+
+</div>
+
+</body>
+
+</html>
